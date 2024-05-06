@@ -12,7 +12,7 @@ swift sft \
     --dtype AUTO \
     --output_dir output \
     --ddp_backend nccl \
-    --dataset finetuningdata.json \
+    --custom_train_dataset_path ./finetuningdata.json \
     --train_dataset_sample -1 \
     --num_train_epochs 2 \
     --max_length 2048 \
