@@ -1,0 +1,390 @@
+run sh: `torchrun --nproc_per_node 1 --master_port 29500 /usr/local/lib/python3.11/site-packages/swift/cli/sft.py --model_id_or_path LLM-Research/Meta-Llama-3-8B-Instruct --model_revision master --sft_type lora --tuner_backend peft --template_type llama3 --dtype AUTO --output_dir output --ddp_backend nccl --custom_train_dataset_path ./finetuningdata.json --train_dataset_sample -1 --num_train_epochs 2 --max_length 2048 --check_dataset_strategy warning --lora_rank 8 --lora_alpha 32 --lora_dropout_p 0.05 --lora_target_modules ALL --gradient_checkpointing true --batch_size 1 --weight_decay 0.1 --learning_rate 1e-4 --gradient_accumulation_steps 16 --max_grad_norm 0.5 --warmup_ratio 0.03 --eval_steps 100 --save_steps 100 --save_total_limit 2 --logging_steps 10 --save_only_model true`
+2024-05-06 17:17:13,608 - modelscope - INFO - PyTorch version 2.3.0 Found.
+2024-05-06 17:17:13,608 - modelscope - INFO - Loading ast index from /root/.cache/modelscope/ast_indexer
+2024-05-06 17:17:13,646 - modelscope - INFO - Loading done! Current index file version is 1.14.0, with md5 5a6a07754c62eca9caed74928ebfd8ee and a total number of 976 components indexed
+[INFO:swift] Successfully registered `/usr/local/lib/python3.11/site-packages/swift/llm/data/dataset_info.json`
+[INFO:swift] Start time of running main: 2024-05-06 17:17:13.902868
+[INFO:swift] Setting args.model_type: llama3-8b-instruct
+[INFO:swift] Setting model_info['revision']: master
+[INFO:swift] Setting args.lazy_tokenize: False
+[INFO:swift] output_dir: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714
+[INFO:swift] args: SftArguments(model_type='llama3-8b-instruct', model_id_or_path='LLM-Research/Meta-Llama-3-8B-Instruct', model_revision='master', model_layer_cls_name=None, sft_type='lora', freeze_parameters=0.0, additional_trainable_parameters=[], tuner_backend='peft', template_type='llama3', output_dir='/root/llama3/output/llama3-8b-instruct/v2-20240506-171714', add_output_dir_suffix=True, ddp_backend='nccl', ddp_find_unused_parameters=None, ddp_broadcast_buffers=None, seed=42, resume_from_checkpoint=None, ignore_data_skip=False, dtype='bf16', dataset=['./finetuningdata.json'], dataset_seed=42, dataset_test_ratio=0.01, use_loss_scale=False, system=None, max_length=2048, truncation_strategy='delete', check_dataset_strategy='warning', model_name=[None, None], model_author=[None, None], quantization_bit=0, bnb_4bit_comp_dtype='bf16', bnb_4bit_quant_type='nf4', bnb_4bit_use_double_quant=True, bnb_4bit_quant_storage=None, lora_target_modules=[], lora_rank=8, lora_alpha=32, lora_dropout_p=0.05, lora_bias_trainable='none', lora_modules_to_save=[], lora_dtype='AUTO', lora_lr_ratio=None, use_rslora=False, use_dora=False, adapter_act='gelu', adapter_length=128, use_galore=False, galore_rank=128, galore_target_modules=None, galore_update_proj_gap=50, galore_scale=1.0, galore_proj_type='std', galore_optim_per_parameter=False, galore_with_embedding=False, adalora_target_r=8, adalora_init_r=12, adalora_tinit=0, adalora_tfinal=0, adalora_deltaT=1, adalora_beta1=0.85, adalora_beta2=0.85, adalora_orth_reg_weight=0.5, ia3_target_modules=['DEFAULT'], ia3_feedforward_modules=[], ia3_modules_to_save=[], llamapro_num_new_blocks=4, llamapro_num_groups=None, neftune_noise_alpha=None, neftune_backend='transformers', lisa_activated_layers=0, lisa_step_interval=20, gradient_checkpointing=True, deepspeed=None, batch_size=1, eval_batch_size=1, num_train_epochs=2, max_steps=-1, optim='adamw_torch', adam_beta1=0.9, adam_beta2=0.999, learning_rate=0.0001, weight_decay=0.1, gradient_accumulation_steps=16, max_grad_norm=0.5, predict_with_generate=False, lr_scheduler_type='linear', warmup_ratio=0.03, eval_steps=100, save_steps=100, save_only_model=True, save_total_limit=2, logging_steps=10, dataloader_num_workers=1, dataloader_pin_memory=True, push_to_hub=False, hub_model_id=None, hub_token=None, hub_private_repo=False, push_hub_strategy='push_best', test_oom_error=False, disable_tqdm=False, lazy_tokenize=False, preprocess_num_proc=1, use_flash_attn=None, ignore_args_error=False, check_model_is_latest=True, logging_dir='/root/llama3/output/llama3-8b-instruct/v2-20240506-171714/runs', report_to=['tensorboard'], acc_strategy='token', save_on_each_node=True, evaluation_strategy='steps', save_strategy='steps', save_safetensors=True, gpu_memory_fraction=None, include_num_input_tokens_seen=False, custom_register_path=None, custom_dataset_info=None, max_new_tokens=2048, do_sample=True, temperature=0.3, top_k=20, top_p=0.7, repetition_penalty=1.0, num_beams=1, fsdp='', fsdp_config=None, per_device_train_batch_size=None, per_device_eval_batch_size=None, self_cognition_sample=0, train_dataset_mix_ratio=0.0, train_dataset_mix_ds=['ms-bench'], train_dataset_sample=-1, val_dataset_sample=None, safe_serialization=None, only_save_model=None, neftune_alpha=None, deepspeed_config_path=None, model_cache_dir=None, custom_train_dataset_path=['./finetuningdata.json'], custom_val_dataset_path=[])
+[INFO:swift] Global seed set to 42
+device_count: 1
+rank: 0, local_rank: 0, world_size: 1, local_world_size: 1
+[INFO:swift] Downloading the model from ModelScope Hub, model_id: LLM-Research/Meta-Llama-3-8B-Instruct
+[INFO:swift] Loading the model using model_dir: /root/.cache/modelscope/hub/LLM-Research/Meta-Llama-3-8B-Instruct
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:03<00:00,  1.21it/s]
+[INFO:swift] model.max_model_len: 8192
+[INFO:swift] model_config: LlamaConfig {
+  "_name_or_path": "/root/.cache/modelscope/hub/LLM-Research/Meta-Llama-3-8B-Instruct",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 128000,
+  "eos_token_id": 128001,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 8192,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 8,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": null,
+  "rope_theta": 500000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.40.1",
+  "use_cache": true,
+  "vocab_size": 128256
+}
+
+[INFO:swift] generation_config: GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": 128001,
+  "max_new_tokens": 2048,
+  "pad_token_id": 128001,
+  "temperature": 0.3,
+  "top_k": 20,
+  "top_p": 0.7
+}
+
+[INFO:swift] lora_target_modules: ['q_proj', 'k_proj', 'up_proj', 'v_proj', 'o_proj', 'down_proj', 'gate_proj']
+[INFO:swift] lora_modules_to_save: []
+[INFO:swift] lora_config: get_wrapped_class.<locals>.PeftWrapper(peft_type=<PeftType.LORA: 'LORA'>, auto_mapping=None, base_model_name_or_path='/root/.cache/modelscope/hub/LLM-Research/Meta-Llama-3-8B-Instruct', revision=None, task_type='CAUSAL_LM', inference_mode=False, r=8, target_modules={'q_proj', 'k_proj', 'up_proj', 'v_proj', 'o_proj', 'down_proj', 'gate_proj'}, lora_alpha=32, lora_dropout=0.05, fan_in_fan_out=False, bias='none', use_rslora=False, modules_to_save=[], init_lora_weights=True, layers_to_transform=None, layers_pattern=None, rank_pattern={}, alpha_pattern={}, megatron_config=None, megatron_core='megatron.core', loftq_config={}, use_dora=False, layer_replication=None, lora_dtype=None, lorap_lr_ratio=None, lorap_emb_lr=1e-06)
+[INFO:swift] [base_model.model.model.embed_tokens.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.q_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.q_proj.lora_A.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.q_proj.lora_B.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.k_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.k_proj.lora_A.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.k_proj.lora_B.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.v_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.v_proj.lora_A.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.v_proj.lora_B.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.o_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.o_proj.lora_A.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.self_attn.o_proj.lora_B.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.gate_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.gate_proj.lora_A.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.gate_proj.lora_B.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.up_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.up_proj.lora_A.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.up_proj.lora_B.default.weight]: requires_grad=True, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] [base_model.model.model.layers.0.mlp.down_proj.base_layer.weight]: requires_grad=False, dtype=torch.bfloat16, device=cuda:0
+[INFO:swift] ...
+[INFO:swift] PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): LlamaForCausalLM(
+      (model): LlamaModel(
+        (embed_tokens): Embedding(128256, 4096)
+        (layers): ModuleList(
+          (0-31): 32 x LlamaDecoderLayer(
+            (self_attn): LlamaSdpaAttention(
+              (q_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (k_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (v_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=1024, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=1024, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (o_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (rotary_emb): LlamaRotaryEmbedding()
+            )
+            (mlp): LlamaMLP(
+              (gate_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=14336, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=14336, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (up_proj): lora.Linear(
+                (base_layer): Linear(in_features=4096, out_features=14336, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=4096, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=14336, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (down_proj): lora.Linear(
+                (base_layer): Linear(in_features=14336, out_features=4096, bias=False)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.05, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=14336, out_features=8, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=8, out_features=4096, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+              )
+              (act_fn): SiLU()
+            )
+            (input_layernorm): LlamaRMSNorm()
+            (post_attention_layernorm): LlamaRMSNorm()
+          )
+        )
+        (norm): LlamaRMSNorm()
+      )
+      (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+    )
+  )
+)
+[INFO:swift] PeftModelForCausalLM: 8051.2328M Params (20.9715M Trainable [0.2605%]), 67.1109M Buffers.
+[INFO:swift] Setting model.config.use_cache: False
+[INFO:swift] check dataset...
+[INFO:swift] check_dataset_strategy: 'warning'
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 6528.10it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 6678.83it/s]
+[INFO:swift] train_dataset: Dataset({
+    features: ['query', 'response'],
+    num_rows: 2
+})
+[INFO:swift] val_dataset: Dataset({
+    features: ['query', 'response'],
+    num_rows: 1
+})
+[INFO:swift] system: None
+[INFO:swift] args.lazy_tokenize: False
+[INFO:swift] Using num_proc: 1
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 309.19it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 425.52it/s]
+[INFO:swift] [INPUT_IDS] [128000, 128006, 882, 128007, 271, 57668, 122503, 118006, 33748, 32648, 17792, 39045, 110747, 88852, 28469, 82267, 17297, 116197, 28833, 19967, 1811, 260, 14730, 4521, 314, 257, 330, 69049, 121683, 108585, 794, 314, 260, 330, 58850, 8929, 843, 794, 314, 1835, 330, 82912, 794, 330, 65854, 110245, 498, 1835, 330, 112741, 794, 330, 21990, 102146, 1, 260, 2529, 260, 330, 58850, 36668, 794, 314, 1835, 330, 82912, 794, 330, 65854, 110245, 65789, 40526, 498, 1835, 330, 112741, 794, 330, 21990, 102146, 1, 260, 335, 257, 2529, 257, 330, 33748, 32648, 17792, 82912, 794, 330, 65854, 110245, 498, 257, 330, 110593, 28469, 794, 330, 46729, 70349, 19361, 120522, 53610, 33748, 19000, 16906, 101, 102064, 114831, 104908, 104601, 53610, 5486, 106142, 53610, 5486, 104840, 53610, 498, 257, 330, 69049, 21082, 794, 330, 2366, 19, 8107, 2304, 9953, 1721, 9080, 220, 1032, 28542, 2371, 17620, 1313, 47018, 498, 257, 330, 21082, 124858, 794, 330, 107604, 113082, 28833, 56602, 498, 257, 330, 118899, 508, 40089, 66677, 794, 510, 260, 314, 1835, 330, 76217, 30046, 794, 330, 58850, 8929, 843, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 110916, 114687, 17792, 53901, 43240, 3922, 61056, 83266, 53901, 101704, 84765, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2304, 9953, 1721, 9080, 220, 1032, 28542, 2371, 17620, 868, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 119702, 1, 260, 2529, 260, 314, 1835, 330, 76217, 30046, 794, 330, 57668, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 52030, 103429, 60251, 104237, 91985, 115437, 3922, 53901, 106529, 64209, 6447, 56602, 107099, 46885, 18363, 103242, 21990, 83747, 3922, 61056, 83266, 101704, 27327, 113954, 84765, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2304, 9953, 1721, 9080, 220, 1032, 28542, 2371, 17620, 972, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 30356, 64209, 1, 260, 2529, 260, 314, 1835, 330, 76217, 30046, 794, 330, 58850, 36668, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 37046, 53901, 35086, 112, 3922, 109438, 37046, 105987, 109247, 53610, 498, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2304, 9953, 1721, 9080, 220, 1032, 28542, 2371, 17620, 508, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 119702, 1, 260, 2529, 260, 314, 1835, 330, 76217, 30046, 794, 330, 57668, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 88126, 107480, 46281, 114687, 125586, 102836, 112904, 116337, 127312, 9554, 102856, 84765, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2304, 9953, 1721, 9080, 220, 1032, 28542, 2371, 17620, 914, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 104840, 115289, 1, 260, 2529, 260, 314, 1835, 330, 76217, 30046, 794, 330, 58850, 36668, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 37046, 72027, 37687, 116337, 127312, 9554, 102856, 3922, 37507, 109247, 104840, 53610, 119577, 3922, 109122, 109122, 84765, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2304, 9953, 1721, 9080, 220, 1032, 28542, 2371, 17620, 966, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 119702, 1, 260, 335, 257, 10881, 257, 330, 113691, 79656, 66677, 794, 510, 260, 314, 1835, 330, 76217, 30046, 794, 330, 58850, 8929, 843, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 31958, 36827, 86436, 114687, 35287, 104660, 108321, 115996, 119577, 103054, 498, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2371, 9953, 966, 9080, 220, 508, 28542, 2318, 17620, 868, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 119702, 1, 260, 2529, 260, 314, 1835, 330, 76217, 30046, 794, 330, 57668, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 31958, 36827, 37046, 38093, 29172, 115889, 41920, 25129, 58666, 58850, 9554, 498, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2371, 9953, 966, 9080, 220, 508, 28542, 2318, 17620, 972, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 30356, 64209, 1, 260, 2529, 260, 314, 1835, 330, 76217, 30046, 794, 330, 58850, 36668, 498, 1835, 330, 33005, 794, 330, 33764, 58543, 498, 1835, 330, 44915, 794, 330, 115996, 119577, 108779, 120651, 37507, 27384, 21589, 101, 111582, 35287, 84765, 1835, 330, 21082, 794, 330, 2366, 19, 8107, 2371, 9953, 966, 9080, 220, 508, 28542, 2318, 17620, 508, 47018, 498, 1835, 330, 73981, 102146, 794, 330, 119702, 1, 260, 335, 257, 2331, 335, 692, 128009, 128006, 78191, 128007, 271, 257, 510, 257, 314, 260, 330, 33005, 794, 330, 33764, 58543, 498, 260, 330, 73981, 102146, 794, 330, 104840, 115289, 498, 260, 330, 44915, 794, 330, 110085, 3922, 90112, 88126, 30177, 109247, 104840, 53610, 6447, 31809, 58666, 58850, 57668, 116337, 103054, 11571, 1, 257, 2529, 257, 314, 260, 330, 33005, 794, 330, 28833, 19967, 498, 260, 330, 44915, 794, 330, 102178, 65455, 47770, 70141, 58850, 8929, 843, 330, 257, 335, 2331, 415, 128009]
+[INFO:swift] [INPUT] <|begin_of_text|><|start_header_id|>user<|end_header_id|>
+
+你是一个家庭机器人，请根据以下信息确认下一步动作。         ------------------- {     "当前现场人员": {         "女14432": {             "位置": "客厅",             "表情": "生气"         },         "女主": {             "位置": "客厅门口",             "表情": "生气"         }     },     "机器人位置": "客厅",     "环境信息": "家里有饮水机在厨房，可以提供热水、冷水、温水",     "当前时间": "2024年05月01日 13点04分22秒",     "时间背景": "国际劳动节",     "最近20条记录": [         {             "执行者": "女14432",             "类型": "对话",             "内容": "今天医院人好多，排队好久！",             "时间": "2024年05月01日 13点04分15秒",             "语气": "快速"         },         {             "执行者": "你",             "类型": "对话",             "内容": "看病结果怎么样呀，好担心！节假日期间医生少，排队久能理解！",             "时间": "2024年05月01日 13点04分18秒",             "语气": "关心"         },         {             "执行者": "女主",             "类型": "对话",             "内容": "我好渴，帮我倒杯水",             "时间": "2024年05月01日 13点04分20秒",             "语气": "快速"         },         {             "执行者": "你",             "类型": "对话",             "内容": "您刚从医院回来，不宜喝凉的啊！",             "时间": "2024年05月01日 13点04分25秒",             "语气": "温柔"         },         {             "执行者": "女主",             "类型": "对话",             "内容": "我没说喝凉的啊，来杯温水好了，谢谢！",             "时间": "2024年05月01日 13点04分30秒",             "语气": "快速"         }     ],     "历史相关记录": [         {             "执行者": "女14432",             "类型": "对话",             "内容": "明天去医院了，你材料准备好了吗",             "时间": "2024年04月30日 20点08分15秒",             "语气": "快速"         },         {             "执行者": "你",             "类型": "对话",             "内容": "明天我会提醒二位美女的",             "时间": "2024年04月30日 20点08分18秒",             "语气": "关心"         },         {             "执行者": "女主",             "类型": "对话",             "内容": "准备好了，可是我来大姨妈了！",             "时间": "2024年04月30日 20点08分20秒",             "语气": "快速"         }     ] }         <|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+     [     {         "类型": "对话",         "语气": "温柔",         "内容": "好的，给您接杯温水！小美女你喝吗？"     },     {         "类型": "动作",         "内容": "把头转向女14432 "     } ]     <|eot_id|>
+[INFO:swift] [LABLES_IDS] [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, 257, 510, 257, 314, 260, 330, 33005, 794, 330, 33764, 58543, 498, 260, 330, 73981, 102146, 794, 330, 104840, 115289, 498, 260, 330, 44915, 794, 330, 110085, 3922, 90112, 88126, 30177, 109247, 104840, 53610, 6447, 31809, 58666, 58850, 57668, 116337, 103054, 11571, 1, 257, 2529, 257, 314, 260, 330, 33005, 794, 330, 28833, 19967, 498, 260, 330, 44915, 794, 330, 102178, 65455, 47770, 70141, 58850, 8929, 843, 330, 257, 335, 2331, 415, 128009]
+[INFO:swift] [LABLES] [-100 * 725]     [     {         "类型": "对话",         "语气": "温柔",         "内容": "好的，给您接杯温水！小美女你喝吗？"     },     {         "类型": "动作",         "内容": "把头转向女14432 "     } ]     <|eot_id|>
+[INFO:swift] Dataset Token Length: 714.000000±84.000000, min=630.000000, max=798.000000, size=2
+[INFO:swift] Dataset Token Length: 1124.000000±0.000000, min=1124.000000, max=1124.000000, size=1
+[INFO:swift] training_args: Seq2SeqTrainingArguments(
+_n_gpu=1,
+acc_strategy=token,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'gradient_accumulation_kwargs': None},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+additional_saved_files=[],
+auto_find_batch_size=False,
+bf16=True,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=1,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=nccl,
+ddp_broadcast_buffers=False,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=False,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+dispatch_batches=None,
+do_eval=True,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_steps=100,
+evaluation_strategy=IntervalStrategy.STEPS,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+generation_config=GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": 128001,
+  "max_new_tokens": 2048,
+  "pad_token_id": 128001,
+  "temperature": 0.3,
+  "top_k": 20,
+  "top_p": 0.7
+}
+,
+generation_max_length=None,
+generation_num_beams=None,
+gradient_accumulation_steps=16,
+gradient_checkpointing=True,
+gradient_checkpointing_kwargs=None,
+greater_is_better=False,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=False,
+hub_strategy=HubStrategy.EVERY_SAVE,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=0.0001,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=/root/llama3/output/llama3-8b-instruct/v2-20240506-171714/runs,
+logging_first_step=True,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_kwargs={},
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=0.5,
+max_steps=-1,
+metric_for_best_model=loss,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=2,
+optim=OptimizerNames.ADAMW_TORCH,
+optim_args=None,
+optim_target_modules=None,
+output_dir=/root/llama3/output/llama3-8b-instruct/v2-20240506-171714,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=1,
+per_device_train_batch_size=1,
+predict_with_generate=False,
+prediction_loss_only=False,
+push_hub_strategy=push_best,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=False,
+report_to=['tensorboard'],
+resume_from_checkpoint=None,
+run_name=/root/llama3/output/llama3-8b-instruct/v2-20240506-171714,
+save_on_each_node=True,
+save_only_model=True,
+save_safetensors=True,
+save_steps=100,
+save_strategy=IntervalStrategy.STEPS,
+save_total_limit=2,
+seed=42,
+skip_memory_metrics=True,
+sortish_sampler=True,
+split_batches=None,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+train_sampler_random=True,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_mps_device=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.1,
+)
+Detected kernel version 4.15.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[INFO:swift] The SftArguments will be saved in: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/sft_args.json
+[INFO:swift] The Seq2SeqTrainingArguments will be saved in: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/training_args.json
+[INFO:swift] The logging file will be saved in: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/logging.jsonl
+{'loss': 0.32995361, 'acc': 0.07766634, 'grad_norm': 0.86328125, 'learning_rate': 0.0001, 'epoch': 1.0, 'global_step': 1}                                     
+Train: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.29s/it]
+{'eval_loss': 0.98331404, 'eval_acc': 0.8021978, 'eval_runtime': 0.2883, 'eval_samples_per_second': 3.469, 'eval_steps_per_second': 3.469, 'epoch': 2.0, 'global_step': 2}
+Val: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 397.87it/s]
+[INFO:swift] Saving model checkpoint to /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/checkpoint-2
+/usr/local/lib/python3.11/site-packages/peft/utils/save_and_load.py:154: UserWarning: Could not find a config file in /root/.cache/modelscope/hub/LLM-Research/Meta-Llama-3-8B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+{'train_runtime': 3.4204, 'train_samples_per_second': 1.169, 'train_steps_per_second': 0.585, 'train_loss': 0.32995361, 'epoch': 2.0, 'global_step': 2}       
+Train: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:03<00:00,  1.69s/it]
+[INFO:swift] last_model_checkpoint: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/checkpoint-2
+[INFO:swift] best_model_checkpoint: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/checkpoint-2
+[INFO:swift] images_dir: /root/llama3/output/llama3-8b-instruct/v2-20240506-171714/images
+[INFO:swift] End time of running main: 2024-05-06 17:17:28.550874
