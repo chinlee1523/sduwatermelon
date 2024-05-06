@@ -10,7 +10,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 tokenizer = AutoTokenizer.from_pretrained("LLM-Research/Meta-Llama-3-8B-Instruct")
 
-prompt = """你是一个家庭机器人，请根据以下信息确认下一步动作。
+prompt = """请根据以下信息确认下一步动作。
         -------------------
 {
     \"当前现场人员\": {
@@ -75,7 +75,8 @@ prompt = """你是一个家庭机器人，请根据以下信息确认下一步�
     ]
 }"""
 messages = [
-
+    {"role": "system", "content": "你是一个家庭服务机器人."},
+    {"role": "user", "content": prompt}
 
     ]
 text = tokenizer.apply_chat_template(
